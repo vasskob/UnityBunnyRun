@@ -2,34 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BunnyControler : MonoBehaviour {
 	private Rigidbody2D myRigidbody;
 	private Animator myAnim;
 	public float bunnyJumpForce=500f;
-	public float bunnyTorque=10f;
+	private float bunnyHurtTime = -1;
+	private Collider2D myCollider;
+	public Text scoreTxt;
+	private float startTime;
+
 	// Use this for initialization
+
 	void Start () {
 		myRigidbody = GetComponent<Rigidbody2D>();
 		myAnim = GetComponent<Animator> ();
+		myCollider = GetComponent<Collider2D>();
 
+		startTime = Time.time;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonUp ("Jump")) {
-			myRigidbody.AddForce (transform.up * bunnyJumpForce);
-			// myRigidbody.AddForceAtPosition (transform.);
+		if (bunnyHurtTime == -1) {
+			if (Input.GetButtonUp ("Jump")) {
+				myRigidbody.AddForce (transform.up * bunnyJumpForce);
+				// myRigidbody.AddForceAtPosition (transform.);
+			}
+			//	myAnim.SetFloat ("wVelocity", Mathf.Abs(myRigidbody.velocity.y));
+			myAnim.SetFloat ("wVelocity", myRigidbody.velocity.y);
+			scoreTxt.text = (Time.time - startTime).ToString("0.0");
+		} else {
+			if (Time.time > bunnyHurtTime + 2) {
+				SceneManager.LoadScene ("maneScene");
+			}
 		}
-	//	myAnim.SetFloat ("wVelocity", Mathf.Abs(myRigidbody.velocity.y));
-		myAnim.SetFloat ("wVelocity", myRigidbody.velocity.y);
-
 	}
 	void OnCollisionEnter2D (Collision2D collision){
 		if (collision.collider.gameObject.layer==LayerMask.NameToLayer("Enemy")){
 
-		//	Application.LoadLevel (Application.loadedLevel);
-			SceneManager.LoadScene ("maneScene");		
+			foreach (PrefabSpawner spawner in FindObjectsOfType<PrefabSpawner>())
+			{
+			spawner.enabled = false;
+			}
+
+			foreach (MoveLeft moveLefter in FindObjectsOfType<MoveLeft>())
+			{
+				moveLefter.enabled = false;
+			}
+
+			bunnyHurtTime=Time.time;
+			myAnim.SetBool ("bunnyHurt", true);
+			myRigidbody.velocity = Vector2.zero;
+			myRigidbody.AddForce (transform.up * bunnyJumpForce);
+			myCollider.enabled = false;
+
 		}
 
 	}
