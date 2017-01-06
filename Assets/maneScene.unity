@@ -997,7 +997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba2d36a425b6e945a6878360d395f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bunnyJumpForce: 500
+  bunnyJumpForce: 700
   scoreTxt: {fileID: 1779602667}
 --- !u!95 &1181156334
 Animator:
@@ -1045,8 +1045,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 4825426913638118, guid: c4464ef702b4fec4eadbee522f897210,
     type: 2}
-  spawnRate: 1
-  randomDellay: 1
+  spawnCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: -0.01915725
+      value: 1.3391048
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 0.6726409
+      value: 1.1513449
+      inSlope: -0.32973537
+      outSlope: -0.32973537
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.4807986
+      value: 1.0472293
+      inSlope: -0.5275011
+      outSlope: -0.5275011
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 2.0051744
+      value: 1.0191021
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  curveLengthInSec: 30
 --- !u!4 &1206271010
 Transform:
   m_ObjectHideFlags: 0
