@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212470277748519552}
   - component: {fileID: 114775449845279000}
   - component: {fileID: 61831065127152088}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: mountain2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

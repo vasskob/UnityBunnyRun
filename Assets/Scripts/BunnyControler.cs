@@ -13,6 +13,11 @@ public class BunnyControler : MonoBehaviour {
 	public Text scoreTxt;
 	private float startTime;
 	private int jumpsCount=2;
+	public AudioSource jumpSfx;
+	public AudioSource deathSfx;
+
+
+
 	// Use this for initialization
 
 	void Start () {
@@ -37,6 +42,7 @@ public class BunnyControler : MonoBehaviour {
 					myRigidbody.AddForce (transform.up * bunnyJumpForce);
 				}
 				jumpsCount--;
+				jumpSfx.Play();
 				// myRigidbody.AddForceAtPosition (transform.);
 			}
 			//	myAnim.SetFloat ("wVelocity", Mathf.Abs(myRigidbody.velocity.y));
@@ -64,6 +70,7 @@ public class BunnyControler : MonoBehaviour {
 			myRigidbody.velocity = Vector2.zero;
 			myRigidbody.AddForce (transform.up * bunnyJumpForce);
 			myCollider.enabled = false;
+			deathSfx.Play ();
 
 		} else if (collision.collider.gameObject.layer == LayerMask.NameToLayer ("Ground")) {
 			jumpsCount = 2;
