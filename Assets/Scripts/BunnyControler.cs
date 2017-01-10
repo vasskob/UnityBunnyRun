@@ -36,7 +36,7 @@ public class BunnyControler : MonoBehaviour {
 		}
 
 		if (bunnyHurtTime == -1) {
-			if (Input.GetButtonUp ("Jump") && jumpsCount>0) {
+			if ((Input.GetButtonUp ("Jump")||Input.GetButtonUp ("Fire1")) && jumpsCount>0) {
 
 				if (myRigidbody.velocity.y < 0) {
 					myRigidbody.velocity = Vector2.zero;
