@@ -30,6 +30,11 @@ public class BunnyControler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (Input.GetKeyUp (KeyCode.Escape)) {
+			SceneManager.LoadScene ("Title");
+		}
+
 		if (bunnyHurtTime == -1) {
 			if (Input.GetButtonUp ("Jump") && jumpsCount>0) {
 
@@ -50,7 +55,7 @@ public class BunnyControler : MonoBehaviour {
 			scoreTxt.text = (Time.time - startTime).ToString("0.0");
 		} else {
 			if (Time.time > bunnyHurtTime + 2) {
-				SceneManager.LoadScene ("maneScene");
+				SceneManager.LoadScene ("Game");
 			}
 		}
 	}
